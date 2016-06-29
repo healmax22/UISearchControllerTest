@@ -10,7 +10,7 @@
 #import "QNSearchResultController.h"
 //#import "QNHomeNavigationController.h"
 
-@interface QNSearchViewController()<UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating>
+@interface QNSearchViewController()<UISearchControllerDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<UIBarButtonItem *> *tempRightBarButtonItems;
@@ -24,21 +24,6 @@
 @implementation QNSearchViewController
 //@synthesize searchResultViewController;
 #pragma mark - getter setter
-
-//- (UISearchController *)searchController {
-//    if (_searchController) {
-//        [self setupSearchController];
-//    }
-//    
-//    return _searchController;
-//}
-
-
-//- (void)setSearchResultViewController:(UIViewController<QNSearchResultControllerDelegate> *)searchResultViewController {
-//    _searchResultViewController = searchResultViewController;
-//    _searchController = [[UISearchController alloc] initWithSearchResultsController:_searchResultViewController];
-//    [self setupSearchController];
-//}
 
 
 #pragma mark - viewController life cycle
@@ -129,33 +114,4 @@
         
     }
 }
-
-#pragma mark - UISearchResultsUpdating
-
-//-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-//    
-//    NSString *searchString = [self.searchController.searchBar text];
-//    
-//    if (self.searchController.searchResultsController == self.searchResultViewController) {
-//        [self.searchResultViewController searchWithKeyword:searchString];
-//
-//    }
-//    
-//}
-
-#pragma mark - UISearchBarDelegate
-
-// Workaround for bug: -updateSearchResultsForSearchController: is not called when scope buttons change
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
-    [self updateSearchResultsForSearchController:self.searchController];
-}
-
-- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar{
-    
-    //Hide keyboard
-    [self.searchController.searchBar resignFirstResponder];
-    [self.view endEditing:YES];
-    
-}
-
 @end
