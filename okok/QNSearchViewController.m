@@ -76,6 +76,10 @@
     self.definesPresentationContext = YES;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    self.definesPresentationContext = NO;
+}
+
 - (void)setupSearchController {
     if (!self.searchResultViewController) {
         self.searchResultViewController = [[QNSearchResultController alloc] init];

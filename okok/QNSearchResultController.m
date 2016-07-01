@@ -7,6 +7,7 @@
 //
 
 #import "QNSearchResultController.h"
+#import "ViewController.h"
 //#import "QNSystemService.h"
 //#import "QNSearchService.h"
 //#import "QNErrorHandler.h"
@@ -34,16 +35,17 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    NSArray *notes = self.notesInSites[section];
-    return 0;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *resultCell;
+    UITableViewCell *resultCell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    resultCell.textLabel.text = @"tt";
 //    if (indexPath.row == 0) {
 //        QNTagHeaderCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"QNTagHeaderCell" forIndexPath:indexPath];
 //        cell.siteViewModel = self.sites[indexPath.section];
@@ -60,45 +62,16 @@
     return resultCell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 44.0f;
-    } else {
-        return 100.0f;
-    }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard *s = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewController *controller = [s instantiateViewControllerWithIdentifier:@"ViewController"];
+    [self.presentingViewController.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - QNSearchResultControllerDelegate  
 
 - (void)searchWithKeyword:(NSString *)keyword {
-//    __block __weak QNSearchResultController *weakSelf = self;
-//    
-//    QNSystemService *service = [[QNSystemService alloc] init];
-//    [[[[[service fetchSiteList] deliverOn:[RACScheduler mainThreadScheduler]]
-//       flattenMap:^RACStream *(NSMutableArray *siteList) {
-//           NSMutableArray *signalArray = [[NSMutableArray alloc] init];
-//           QNSearchService *service = [[QNSearchService alloc] init];
-//           for (QNSite *site in siteList) {
-//               [signalArray addObject:[service fetchNoteListWithKeyWord:keyword site:site]];
-//           }
-//           weakSelf.sites = siteList;
-//           return [RACSignal zip:signalArray];
-//       }]
-//      map:^id(RACTuple *responseTuple) {
-//          return responseTuple.rac_sequence.array;
-//      }] subscribeNext:^(NSMutableArray *notesInSites) {
-//          weakSelf.notesInSites = [notesInSites mutableCopy];
-//          for (NSArray *notes in notesInSites) {
-//              if(notes.count == 0){
-//                  NSInteger index = [notesInSites indexOfObject:notes];
-//                  [weakSelf.notesInSites removeObjectAtIndex:index];
-//                  [weakSelf.sites removeObjectAtIndex:index];
-//              }
-//          }
-//          [weakSelf.tableView reloadData];
-//      } error:^(NSError *error) {
-//          [QNErrorHandler showErrorMessageWithError:error];
-//      }];
+
 }
 
 
